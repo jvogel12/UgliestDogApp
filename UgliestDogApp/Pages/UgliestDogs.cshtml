@@ -1,0 +1,41 @@
+﻿@page
+@model UgliestDogsModel
+@{
+    // Sets the title shown in the browser tab and layout
+    ViewData["Title"] = "Ugliest Dogs";
+}
+
+<!-- Main page heading -->
+<h1>World's Ugliest Dog Contest Winners</h1>
+
+<!-- Form that posts back to the same page -->
+<form method="post">
+    <!-- Dropdown list populated from Model.DogList -->
+    <!-- When selection changes, the form automatically submits -->
+    <select name="selectedDog" asp-items="Model.DogList" onchange="this.form.submit()">
+        <!-- Default placeholder option -->
+        <option value="">-- Select a Dog --</option>
+    </select>
+</form>
+
+<!-- Check if a dog has been selected and loaded -->
+@if (Model.SelectedDog != null)
+{
+    <h2>@Model.SelectedDog.Name</h2>
+
+
+    <p>Breed: @Model.SelectedDog.Breed</p>
+
+
+    <p>Year: @Model.SelectedDog.Year</p>
+
+
+    <img src="/images/@Model.SelectedDog.ImageFileName"
+         alt="@Model.SelectedDog.Name"
+         style="max-width: 300px;" />
+}
+
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/UgliestDogs">Ugliest Dogs</a>
+</li>
